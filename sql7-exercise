@@ -1,0 +1,66 @@
+SELECT * FROM sample71_a;
+SELECT * FROM sample71_b;
+
+SELECT * FROM sample71_a
+UNION
+SELECT * FROM sample71_b;
+
+SELECT * FROM sample71_a
+UNION
+SELECT * FROM sample71_b
+UNION
+SELECT * FROM sample31;
+
+SELECT a FROM sample71_a
+UNION
+SELECT b FROM sample71_b
+UNION
+SELECT age FROM sample31;
+
+SELECT * FROM sample71_a UNION SELECT * FROM sample71_b;
+SELECT * FROM sample71_b UNION SELECT * FROM sample71_a;
+
+SELECT a FROM sample71_a ORDER BY a
+UNION
+SELECT b FROM sample71_b;
+
+SELECT a FROM sample71_a
+UNION
+SELECT b FROM sample71_b ORDER BY b;
+
+SELECT a AS c FROM sample71_a
+UNION
+SELECT b AS c FROM sample71_b ORDER BY c;
+
+SELECT * FROM sample71_a
+UNION ALL
+SELECT * FROM sample71_b;
+
+
+SELECT * FROM sample72_x;
+SELECT * FROM sample72_y;
+SELECT * FROM sample72_x, sample72_y;
+
+CREATE TABLE 상품 (
+  상품코드 CHAR(4) NOT NULL,
+  상품명 VARCHAR(30),
+  메이커명 VARCHAR(30),
+  가격 INTEGER,
+  상품분류 VARCHAR(30),
+  PRIMARY KEY (상품코드)
+);
+
+CREATE TABLE 재고수 (
+  상품코드 CHAR(4),
+  입고날짜 DATE,
+  재고수 INTEGER
+);
+
+SELECT * FROM 상품, 재고수;
+
+SELECT * FROM 상품, 재고수 WHERE 상품.상품코드 = 재고수.상품코드;
+
+SELECT 상품.상품명, 재고수.재고수
+  FROM 상품 INNER JOIN 재고수
+    ON 상품.상품코드 = 재고수.상품코드
+  WHERE 상품.상품분류 = '식료품';
