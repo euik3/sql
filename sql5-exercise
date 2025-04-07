@@ -115,3 +115,48 @@ UPDATE sample551 SET a = '있음' WHERE EXISTS (SELECT * FROM sample552 WHERE sa
 SELECT * FROM sample551 WHERE no IN (3, 5);
 
 SELECT * FROM sample551 WHERE no IN (SELECT no2 FROM sample552);
+
+
+CREATE TABLE 메이커 (
+  메이커코드 CHAR(4) NOT NULL,
+  메이커명 VARCHAR(30),
+  PRIMARY KEY (메이커코드)
+);
+
+SELECT S.상품명, M.메이커명
+  FROM 상품2 S INNER JOIN 메이커 M
+    ON S.메이커코드 = M.메이커코드;
+
+SELECT S1.상품명, S2.상품명
+  FROM 상품 S1 INNER JOIN 상품 S2
+    ON S1.상품코드 = S2.상품코드;
+
+
+
+SELECT 상품3.상품명, 재고수.재고수
+FROM 상품3 INNER JOIN 재고수
+ON 상품3.상품코드 = 재고수.상품코드
+WHERE 상품3.상품분류 = ‘식료품’;
+
+
+SELECT 상품3.상품명, 재고수.재고수
+  FROM 상품3, 재고수
+  WHERE 상품3.상품코드 = 재고수.상품코드 (+)
+    AND 상품3.상품분류 = '식료품';
+
+
+
+SELECT * FROM A UNION SELECT * FROM B;
+
+SELECT * FROM A EXCEPT SELECT * FROM B;
+
+SELECT * FROM A INTERSECT SELECT * FROM B;
+
+SELECT * FROM A, B;
+SELECT * FROM A CROSS JOIN B;
+
+SELECT * FROM A WHERE no < 3;
+
+SELECT a FROM A;
+
+SELECT a FROM A INNER JOIN B ON A.no = B.no;
